@@ -1,0 +1,79 @@
+name: $(Year:yyyy).$(Month).$(DayOfMonth).$(Rev:r)
+trigger:
+  branches:
+    include:
+      - master
+
+resources:
+  pipelines:
+    - pipeline: ImpliciXData
+      project: ImpliciX
+      source: data
+      branch: master
+
+stages:
+  - stage: regularBuild
+    jobs:
+      - job: regularBuild
+        pool:
+          vmImage: 'ubuntu-latest'
+        
+        variables:
+          buildConfiguration: 'Release'
+        
+        steps:
+          - template: azure-pipelines-template-dotnet-setup.yml
+
+          - task: DotNetCoreCLI@2
+            displayName: Restore
+            inputs:
+              command: restore
+              projects: "**/*.csproj"
+              feedsToUse: 'config'
+              nugetConfigPath: "./NuGet.Config"
+
+          - task: DotNetCoreCLI@2
+            displayName: Build
+            inputs:
+              command: build
+              projects: "**/*.csproj"
+              arguments: -c $(buildConfiguration)
+
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: test
+              projects: "**/tests/*.csproj"
+              arguments: -c $(buildConfiguration) --filter TestCategory!=ExcludeFromCI --logger "trx" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+            displayName: Run Tests
+
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: |
+                $assemblyVersionRead=[System.Reflection.Assembly]::LoadFrom("ImpliciX.ApplicationsTestHelpers/src/bin/$(buildConfiguration)/net8.0/ImpliciX.ApplicationsTestHelpers.dll").GetName().Version.ToString(3)
+                Write-Host "Assembly version read = $assemblyVersionRead"
+                Write-Host "##vso[task.setvariable variable=packageVersionFromPS;]$assemblyVersionRead"
+            displayName: Get assembly version
+
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: custom
+              custom: pack
+              arguments: ImpliciX.ApplicationsTestHelpers/src/ImpliciX.ApplicationsTestHelpers.csproj -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -p:PackageVersion=$(packageVersionFromPS)
+            displayName: Create nupkg
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              artifactName: 'applications_test_helpers'
+            displayName: Publish artifacts
+
+          - task: NuGetCommand@2
+            inputs:
+              command: push
+              feedsToUse: select
+              packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+              nuGetFeedType: internal
+              publishVstsFeed: 'ImpliciX'
+            continueOnError: true
+            displayName: Publish to artifacts feed

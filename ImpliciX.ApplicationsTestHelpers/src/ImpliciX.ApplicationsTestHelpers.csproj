@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="GitInfo" Version="2.3.0" />
+        <PackageReference Include="ImpliciX.Data" Version="*" />
+        <PackageReference Include="ImpliciX.Language" Version="*" />
+        <PackageReference Include="NFluent" Version="2.7.1" />
+    </ItemGroup>
+
+</Project>

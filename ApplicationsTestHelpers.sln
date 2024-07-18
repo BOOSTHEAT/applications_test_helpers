@@ -1,0 +1,45 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29512.175
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipelines", "Pipelines", "{78F811A2-2315-45A7-A312-1467C9A4BDE2}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines-applications-test-helpers.yml = azure-pipelines-applications-test-helpers.yml
+		azure-pipelines-template-dotnet-setup.yml = azure-pipelines-template-dotnet-setup.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImpliciX.ApplicationsTestHelpers", "ImpliciX.ApplicationsTestHelpers\src\ImpliciX.ApplicationsTestHelpers.csproj", "{2CA01A34-C886-4C13-BDEF-AAF8C38E7706}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE61F268-0900-400A-BF77-F2E0EEB691BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE61F268-0900-400A-BF77-F2E0EEB691BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE61F268-0900-400A-BF77-F2E0EEB691BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE61F268-0900-400A-BF77-F2E0EEB691BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D04FE7DE-719C-435C-9264-7171CBB87DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D04FE7DE-719C-435C-9264-7171CBB87DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D04FE7DE-719C-435C-9264-7171CBB87DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D04FE7DE-719C-435C-9264-7171CBB87DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9664338-89A0-445F-AC77-13750A8A9E8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9664338-89A0-445F-AC77-13750A8A9E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9664338-89A0-445F-AC77-13750A8A9E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9664338-89A0-445F-AC77-13750A8A9E8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CA01A34-C886-4C13-BDEF-AAF8C38E7706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA01A34-C886-4C13-BDEF-AAF8C38E7706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA01A34-C886-4C13-BDEF-AAF8C38E7706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CA01A34-C886-4C13-BDEF-AAF8C38E7706}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9C0BCC1-0184-44B3-A2E1-6D0D2B201DE4}
+	EndGlobalSection
+EndGlobal
